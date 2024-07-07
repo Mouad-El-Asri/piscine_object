@@ -1,0 +1,9 @@
+# Compiled Object files
+*.o
+
+# Executables
+*.out
+
+# Other generated files
+*.vscode/
+*.DS_Store
