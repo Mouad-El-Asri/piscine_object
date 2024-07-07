@@ -16,20 +16,21 @@ class Bank
 		const int &getLiquidity() const;
 		void addFees(const int &amount);
 		void deposit(Account *account, const int &moneyAmount);
+		void giveLoan(Account *account, const int&loanAmmount);
 		void createAcount(Account *account);
 		void deleteAccount(const int &id);
 		void modifyAccount(const int &id);
 
-		// friend std::ostream& operator << (std::ostream& p_os, const Bank& p_bank)
-		// {
-		// 	p_os << "Bank informations : " << std::endl;
-		// 	p_os << "Liquidity : " << p_bank.liquidity << std::endl;
+		friend std::ostream& operator << (std::ostream& p_os, const Bank& p_bank)
+		{
+			p_os << "Bank informations : " << std::endl;
+			p_os << "Liquidity : " << p_bank.liquidity << std::endl;
 
-		// 	for (auto &clientAccount : p_bank.clientAccounts)
-		// 		p_os << *clientAccount << std::endl;
+			for (auto &clientAccount : p_bank.clientAccounts)
+				p_os << *clientAccount << std::endl;
 
-		// 	return (p_os);
-		// }
+			return (p_os);
+		}
 };
 
 #endif

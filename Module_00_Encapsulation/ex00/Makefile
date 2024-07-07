@@ -1,10 +1,11 @@
-NAME = btc
+NAME = DivideAndConquer
 
 CPP = c++
 
 CPPFLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRCS = DivideAndRule.cpp \
+SRCS = Account.cpp \
+	Bank.cpp \
 	main.cpp
 
 OBJS = $(SRCS:.cpp=.o)
