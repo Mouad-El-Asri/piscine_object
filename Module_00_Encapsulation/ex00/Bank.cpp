@@ -4,6 +4,10 @@ Bank::Bank() : liquidity(0) {
 	std::cout << "Bank created!" << std::endl;
 }
 
+Bank::~Bank() {
+	std::cout << "Bank destroyed!" << std::endl;
+}
+
 const int &Bank::getLiquidity() const {
 	return liquidity;
 }
@@ -59,7 +63,7 @@ void Bank::deleteAccount(const int &id) {
 	for (it = this->clientAccounts.begin(); it != this->clientAccounts.end(); it++) {
 		if ((*it)->getId() == id) {
 			this->clientAccounts.erase(it);
-			(*it)->~Account();
+			// (*it)->~Account();
 			std::cout << "Account " << id << " deleted from the bank" << std::endl;
 			return ;
 		}

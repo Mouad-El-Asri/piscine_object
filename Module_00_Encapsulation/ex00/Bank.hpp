@@ -13,6 +13,7 @@ class Bank
 
 	public:
 		Bank();
+		~Bank();
 		const int &getLiquidity() const;
 		void setLiquidity(const int &liquidity);
 		void addFees(const int &amount);

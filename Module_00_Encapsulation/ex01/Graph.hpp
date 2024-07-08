@@ -7,10 +7,13 @@
 
 class Graph {
 	private:
-		Vector2 graph;
+		int size;
+		std::vector< std::vector<std::string> > graph;
 		std::vector<Vector2> pointsList;
 	public:
-		Graph(const int &x, const int &y);
+		Graph();
+		Graph(const int &size);
+		void addPoint(const float &x, const float &y);
 		void displayGraph();
 };
 

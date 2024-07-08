@@ -5,6 +5,7 @@ CPP = c++
 CPPFLAGS = -Wall -Wextra -Werror -std=c++98
 
 SRCS = Graph.cpp \
+	Vector2.cpp \
 	main.cpp
 
 OBJS = $(SRCS:.cpp=.o)
