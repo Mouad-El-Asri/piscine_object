@@ -1,6 +1,13 @@
 #include "Account.hpp"
 
 Account::Account() : id(nextId++), value(0), loan(0) {
+	std::cout << "Account " << this->getId() << " created!" << std::endl;
+}
+
+Account::~Account() {
+	this->value = 0;
+	this->loan = 0;
+	std::cout << "Account " << this->getId() << " deleted!" << std::endl;
 }
 
 const int &Account::getId() const {

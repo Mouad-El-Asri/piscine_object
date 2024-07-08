@@ -14,20 +14,22 @@ class Bank
 	public:
 		Bank();
 		const int &getLiquidity() const;
+		void setLiquidity(const int &liquidity);
 		void addFees(const int &amount);
 		void deposit(Account *account, const int &moneyAmount);
-		void giveLoan(Account *account, const int&loanAmmount);
-		void createAcount(Account *account);
+		void withdraw(Account *account, const int &moneyAmount);
+		void giveLoan(Account *account, const int&loanAmount);
+		void addAcount(Account *account);
 		void deleteAccount(const int &id);
-		void modifyAccount(const int &id);
+		void getLoanBack(const int &id);
 
-		friend std::ostream& operator << (std::ostream& p_os, const Bank& p_bank)
-		{
-			p_os << "Bank informations : " << std::endl;
-			p_os << "Liquidity : " << p_bank.liquidity << std::endl;
+		friend std::ostream& operator << (std::ostream& p_os, const Bank& p_bank) {
+			p_os << "Liquidity : " << p_bank.getLiquidity() << std::endl;
 
-			for (auto &clientAccount : p_bank.clientAccounts)
-				p_os << *clientAccount << std::endl;
+			std::vector<Account *>::const_iterator it;
+			for (it = p_bank.clientAccounts.begin(); it != p_bank.clientAccounts.end(); it++) {
+				p_os << **it << std::endl;
+			}
 
 			return (p_os);
 		}

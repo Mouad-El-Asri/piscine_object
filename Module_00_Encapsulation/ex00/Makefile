@@ -1,4 +1,4 @@
-NAME = DivideAndConquer
+NAME = DivideAndConquer.out
 
 CPP = c++
 
