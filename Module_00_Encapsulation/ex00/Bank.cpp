@@ -22,34 +22,42 @@ void Bank::addFees(const int &feesAmount) {
 }
 
 void Bank::deposit(Account *account, const int &depositAmount) {
+	if (!account)
+		throw std::invalid_argument("Null account passed to deposit");
+	else if (depositAmount <= 0)
+		throw std::runtime_error("Deposit calculation overflow");
 	int fees = depositAmount * 0.05;
 	int accountDepositAmount = depositAmount - fees;
 	this->addFees(fees);
 	account->value += accountDepositAmount;
+	this->liquidity += accountDepositAmount;
 	std::cout << "Deposit of " << accountDepositAmount << " to account " << account->getId() << std::endl;
 }
 
 void Bank::withdraw(Account *account, const int &withdrawalAmount) {
-	if (account->value >= withdrawalAmount) {
-		int fees = withdrawalAmount * 0.05;
-		int accountWithdrawalAmount = withdrawalAmount + fees;
-		this->addFees(fees);
-		account->value -= accountWithdrawalAmount;
-		std::cout << "Withdrawal of " << withdrawalAmount << " from account " << account->getId() << std::endl;
-	} else {
-		std::cout << "Account " << account->getId() << " does not have enough money to withdraw " << withdrawalAmount << std::endl;
-	}
+	if (!account)
+		throw std::invalid_argument("Null account passed to withdraw");
+	else if (account->value < withdrawalAmount)
+		throw std::runtime_error("Insufficient funds to withdraw");
+	else if (withdrawalAmount <= 0)
+		throw std::runtime_error("Withdrawal calculation overflow");
+	int fees = withdrawalAmount * 0.05;
+	int accountWithdrawalAmount = withdrawalAmount + fees;
+	this->addFees(fees);
+	account->value -= accountWithdrawalAmount;
+	this->liquidity -= accountWithdrawalAmount;
+	std::cout << "Withdrawal of " << withdrawalAmount << " from account " << account->getId() << std::endl;
 }
 
 void Bank::giveLoan(Account *account, const int&loanAmount) {
-	if (this->liquidity > loanAmount) {
-		account->value += loanAmount;
-		int fees = loanAmount * 0.05;
-		account->loan += loanAmount + fees;
-		std::cout << "Loan of " << loanAmount << " given to account " << account->getId() << std::endl;
-	} else {
-		std::cout << "Bank does not have enough liquidity to give a loan of " << loanAmount << " to account " << account->getId() << std::endl;
-	}
+	if (!account)
+		throw std::invalid_argument("Null account passed to giveLoan");
+	else if (this->liquidity <= loanAmount)
+		throw std::runtime_error("Insufficient bank liquidity to give loan");
+	account->value += loanAmount;
+	int fees = loanAmount * 0.05;
+	account->loan += loanAmount + fees;
+	std::cout << "Loan of " << loanAmount << " given to account " << account->getId() << std::endl;
 }
 
 void Bank::addAcount(Account *account) {
@@ -63,13 +71,12 @@ void Bank::deleteAccount(const int &id) {
 	for (it = this->clientAccounts.begin(); it != this->clientAccounts.end(); it++) {
 		if ((*it)->getId() == id) {
 			this->clientAccounts.erase(it);
-			// (*it)->~Account();
 			std::cout << "Account " << id << " deleted from the bank" << std::endl;
 			return ;
 		}
 	}
 
-	std::cout << "No account exist in the bank with the id : " << id << std::endl;
+	throw std::invalid_argument("No account exist in the bank with the id!");
 }
 
 void Bank::getLoanBack(const int &id) {
@@ -84,5 +91,5 @@ void Bank::getLoanBack(const int &id) {
 		}
 	}
 
-	std::cout << "No account exist in the bank with the id : " << id << std::endl;
+	throw std::invalid_argument("No account exist in the bank with the id!");
 }

@@ -1,31 +1,18 @@
 #include "Graph.hpp"
 
-Graph::Graph() :
-	size(5),
-	graph(this->size, std::vector<std::string>(this->size, ". ")),
-	pointsList(this->size, std::vector<bool>(this->size, false)){}
+Graph::Graph() : size(5), graph(this->size, std::vector<std::string>(this->size, ". ")) {}
 
-Graph::Graph(const int &size) :
-	size(size), 
-	graph(this->size, std::vector<std::string>(this->size, ". ")),
-	pointsList(this->size, std::vector<bool>(this->size, false)) {}
+Graph::Graph(const int &size) : size(size), graph(this->size, std::vector<std::string>(this->size, ". ")) {}
 
 void Graph::addPoint(const float &x, const float &y) {
-	if (x < this->size && x >= 0 && \
-		y < this->size && y >= 0) {
-		this->pointsList[x][y] = true;
-	}
+	this->pointsList.push_back(Vector2(x, y));
 }
 
 void Graph::displayGraph() {
 	for (int i = 0; i < this->size; i++) {
 		std::cout << this->size - 1 - i << " ";
-		for (int j = 0; j < this->size; j++) {
-			if (this->pointsList[this->size - i - 1][j])
-				std::cout << "X ";
-			else
-				std::cout << ". ";
-		}
+		for (int j = 0; j < this->size; j++)
+			std::cout << ". ";
 		std::cout << std::endl;
 	}
 	for (int j = 0; j < this->size; j++) {
