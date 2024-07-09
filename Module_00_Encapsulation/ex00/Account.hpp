@@ -6,15 +6,15 @@
 class Account
 {
 	private:
-		int id;
-		static int nextId;
+		long id;
+		static long nextId;
 		int value;
 		int loan;
 
 	public:
 		Account();
 		~Account();
-		const int &getId() const;
+		const long &getId() const;
 		const int &getValue() const;
 		const int &getLoan() const;
 

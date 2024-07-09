@@ -15,12 +15,14 @@ class Bank
 		Bank();
 		~Bank();
 		const int &getLiquidity() const;
+		const Account &getAccountById(const int &id) const;
 		void setLiquidity(const int &liquidity);
 		void addFees(const int &amount);
 		void deposit(Account *account, const int &moneyAmount);
 		void withdraw(Account *account, const int &moneyAmount);
-		void giveLoan(Account *account, const int&loanAmount);
-		void addAcount(Account *account);
+		void giveLoan(const int &id, const int&loanAmount);
+		long addAcount(Account *account);
+		long addNe-g -fsanitize=leakwAcount();
 		void deleteAccount(const int &id);
 		void getLoanBack(const int &id);
 

@@ -10,7 +10,7 @@ Account::~Account() {
 	std::cout << "Account " << this->getId() << " deleted!" << std::endl;
 }
 
-const int &Account::getId() const {
+const long &Account::getId() const {
 	return this->id;
 }
 
@@ -22,4 +22,4 @@ const int &Account::getLoan() const {
 	return this->loan;
 }
 
-int Account::nextId = 0;
+long Account::nextId = 0;
