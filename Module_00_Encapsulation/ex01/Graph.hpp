@@ -9,7 +9,7 @@ class Graph {
 	private:
 		int size;
 		std::vector< std::vector<std::string> > graph;
-		std::vector<Vector2> pointsList;
+		std::vector< std::vector<bool> > pointsList;
 	public:
 		Graph();
 		Graph(const int &size);
