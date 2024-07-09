@@ -18,9 +18,9 @@ class Account
 		const int &getValue() const;
 		const int &getLoan() const;
 
-		friend std::ostream& operator << (std::ostream& p_os, const Account& p_account) {
-			p_os << "[ id: " << p_account.getId() << " ] - [ value: " << p_account.getValue() << "] - [ loan: " << p_account.getLoan() <<" ]";
-			return (p_os);
+		friend std::ostream& operator << (std::ostream& os, const Account& account) {
+			os << "[ id: " << account.id << " ] - [ value: " << account.value << "] - [ loan: " << account.loan <<" ]";
+			return (os);
 		}
 
 		friend class Bank;

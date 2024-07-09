@@ -22,7 +22,7 @@ int main()
 		bank.deposit(&accountB, 400);
 
 		// withdraw 500 from accountA
-		bank.withdraw(&accountA, 500);
+		bank.withdraw(&accountA, 50);
 
 		// give loan of 1000 to accountB
 		bank.giveLoan(&accountA, 1000);
@@ -32,12 +32,6 @@ int main()
 
 		// delete accountA
 		bank.deleteAccount(accountA.getId());
-
-		std::cout << " ---------- " << std::endl;
-
-		std::cout << "Account : " << std::endl;
-		std::cout << accountA << std::endl;
-		std::cout << accountB << std::endl;
 
 		std::cout << " ---------- " << std::endl;
 

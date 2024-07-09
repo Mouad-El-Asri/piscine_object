@@ -24,15 +24,14 @@ class Bank
 		void deleteAccount(const int &id);
 		void getLoanBack(const int &id);
 
-		friend std::ostream& operator << (std::ostream& p_os, const Bank& p_bank) {
-			p_os << "Liquidity : " << p_bank.getLiquidity() << std::endl;
+		friend std::ostream& operator << (std::ostream& os, const Bank& bank) {
+			os << "Liquidity : " << bank.liquidity << std::endl;
 
 			std::vector<Account *>::const_iterator it;
-			for (it = p_bank.clientAccounts.begin(); it != p_bank.clientAccounts.end(); it++) {
-				p_os << **it << std::endl;
+			for (it = bank.clientAccounts.begin(); it != bank.clientAccounts.end(); it++) {
+				os << **it << std::endl;
 			}
-
-			return (p_os);
+			return (os);
 		}
 };
 
