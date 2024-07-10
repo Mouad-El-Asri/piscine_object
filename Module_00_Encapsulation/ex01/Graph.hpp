@@ -9,12 +9,21 @@ class Graph {
 	private:
 		int size;
 		std::vector< std::vector<std::string> > graph;
-		std::vector< std::vector<bool> > pointsList;
+		std::vector< Vector2 > pointsList;
 	public:
 		Graph();
 		Graph(const int &size);
-		void addPoint(const float &x, const float &y);
+		const Vector2 &getPoint(const int &i) const;
+
+		void addPoint(const Vector2 &point);
+		void addPointsToGraph();
 		void displayGraph();
+
+		friend std::ostream& operator << (std::ostream& os, const Graph &graph) {
+			for (std::vector<Vector2>::const_iterator it = graph.pointsList.begin(); it != graph.pointsList.end(); ++it)
+				os << "[" << (*it).getX() << ", " << (*it).getY() << "]";
+			return (os);
+		}
 };
 
 #endif

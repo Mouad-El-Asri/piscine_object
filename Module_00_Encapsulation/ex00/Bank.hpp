@@ -22,7 +22,7 @@ class Bank
 		void withdraw(Account *account, const int &moneyAmount);
 		void giveLoan(const int &id, const int&loanAmount);
 		long addAcount(Account *account);
-		long addNe-g -fsanitize=leakwAcount();
+		long addNewAcount();
 		void deleteAccount(const int &id);
 		void getLoanBack(const int &id);
 
