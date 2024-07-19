@@ -1,11 +1,11 @@
 #include "Worker.hpp"
 
-Worker::Worker() : shovel(NULL) {
+Worker::Worker() : tool(NULL) {
 	std::cout << "Worker default constructor called" << std::endl;
 }
 
-Worker::Worker(const Position &position, const Statistic &statistic, Shovel *shovel) :
-	position(position), statistic(statistic), shovel(shovel)
+Worker::Worker(const Position &position, const Statistic &statistic, Tool *tool) :
+	position(position), statistic(statistic), tool(tool)
 {
 	std::cout << "Worker parameterized constructor called" << std::endl;
 }
@@ -25,7 +25,7 @@ Worker &Worker::operator=(const Worker &other) {
 }
 
 Worker::~Worker() {
-	takeShovelAway();
+	takeToolAway();
 	std::cout << "Worker destructor called" << std::endl;
 }
 
@@ -37,19 +37,19 @@ void Worker::setStatistic(const Statistic &newStatistic) {
 	this->statistic = newStatistic;
 }
 
-void Worker::setShovel(Shovel* newShovel) {
-    if (newShovel != this->shovel) {
-        if (shovel) {
-			std::cout << "Worker already has a shovel. Removing the current shovel." << std::endl;
-            shovelRegistry[shovel] = NULL;
-			this->shovel = NULL;
+void Worker::setTool(Tool* newTool) {
+    if (newTool != this->tool) {
+        if (tool) {
+			std::cout << "Worker already has a tool. Removing the current tool." << std::endl;
+            toolRegistry[tool] = NULL;
+			this->tool = NULL;
 		}
-		if (newShovel) {
-			if (shovelRegistry[newShovel])
-				shovelRegistry[newShovel]->takeShovelAway();
-			shovel = newShovel;
-			shovelRegistry[newShovel] = this;
-			std::cout << "New shovel given to worker!" << std::endl;
+		if (newTool) {
+			if (toolRegistry[newTool])
+				toolRegistry[newTool]->takeToolAway();
+			tool = newTool;
+			toolRegistry[newTool] = this;
+			std::cout << "New tool given to worker!" << std::endl;
 		}
     }
 }
@@ -57,24 +57,22 @@ void Worker::setShovel(Shovel* newShovel) {
 void Worker::displayInfo() const {
 	std::cout << "Position: " << this->position.getPositionString() << std::endl;
 	std::cout << "Statistic: " << this->statistic.getStatisticString() << std::endl;
-	std::cout << "Shovel number of uses: " << this->shovel->getNumberOfUses() << std::endl;
+	std::cout << "Tool number of uses: " << this->tool->getNumberOfUses() << std::endl;
 }
 
-void Worker::useShovel() const {
-	if (this->shovel) {
-		this->shovel->use();
-		std::cout << "Worker used the shovel!" << std::endl;
-	}
+void Worker::useTool() const {
+	if (this->tool)
+		this->tool->use();
 	else
-		std::cout << "Worker doesn't have a shovel!" << std::endl;
+		std::cout << "Worker doesn't have a tool!" << std::endl;
 }
 
-void Worker::takeShovelAway() {
-	if (this->shovel) {
-		shovelRegistry[this->shovel] = NULL;
-		this->shovel = NULL;
-		std::cout << "Shovel taken away from worker!" << std::endl;
+void Worker::takeToolAway() {
+	if (this->tool) {
+		toolRegistry[this->tool] = NULL;
+		this->tool = NULL;
+		std::cout << "Tool taken away from worker!" << std::endl;
 	}
 }
 
-std::map<Shovel *, Worker *> Worker::shovelRegistry;
+std::map<Tool *, Worker *> Worker::toolRegistry;
