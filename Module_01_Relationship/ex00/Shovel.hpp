@@ -1,19 +1,16 @@
 #ifndef SHOVEL_HPP
 #define SHOVEL_HPP
 
-#include <iostream>
+#include "Tool.hpp"
 
-class Shovel {
-	private:
-		int numberOfUses;
+class Shovel: public Tool {
 	public:
 		Shovel();
 		Shovel(const Shovel &other);
 		Shovel &operator=(const Shovel &other);
 		~Shovel();
 
-		const int &getNumberOfUses() const;
-		void use();
+		void use() override;
 };
 
 #endif

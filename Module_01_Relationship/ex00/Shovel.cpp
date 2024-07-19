@@ -1,6 +1,6 @@
 #include "Shovel.hpp"
 
-Shovel::Shovel() : numberOfUses(0) {
+Shovel::Shovel() {
 	std::cout << "Shovel default constructor called" << std::endl;
 }
 
@@ -20,10 +20,7 @@ Shovel::~Shovel() {
 	std::cout << "Shovel destructor called" << std::endl;
 }
 
-const int &Shovel::getNumberOfUses() const {
-	return (this->numberOfUses);
-}
-
 void Shovel::use() {
 	this->numberOfUses++;
+	std::cout << "The Shovel has been used" << std::endl;
 }

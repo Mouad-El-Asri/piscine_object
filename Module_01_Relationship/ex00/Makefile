@@ -6,7 +6,9 @@ CPPFLAGS = -Wall -Wextra -Werror
 
 SRCS = Position.cpp \
 	Statistic.cpp \
+	Tool.cpp \
 	Shovel.cpp \
+	Hammer.cpp \
 	Worker.cpp \
 	main.cpp
 
