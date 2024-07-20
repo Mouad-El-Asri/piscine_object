@@ -5,6 +5,9 @@
 #include "Position.hpp"
 #include "Statistic.hpp"
 #include "Tool.hpp"
+#include "Workshop.hpp"
+
+class Workshop;
 
 class Worker {
 	private:
@@ -12,6 +15,10 @@ class Worker {
 		Statistic statistic;
 		Tool *tool;
 		static std::map<Tool *, Worker *> toolRegistry;
+		std::vector<Workshop *> workshopsRegistry;
+
+		long id;
+		static long nextId;
 
 	public:
 		Worker();
@@ -27,6 +34,10 @@ class Worker {
 		void displayInfo() const;
 		void useTool() const;
 		void takeToolAway();
+
+		void registerToWorkshop(Workshop *workshop);
+		void leaveWorkshop(Workshop *workshop);
+		void work() const;
 };
 
 #endif

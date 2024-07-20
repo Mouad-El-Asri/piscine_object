@@ -1,12 +1,18 @@
 #include "Worker.hpp"
 
-Worker::Worker() : tool(NULL) {
+Worker::Worker() : tool(NULL), id(nextId++) {
 	std::cout << "Worker default constructor called" << std::endl;
 }
 
 Worker::Worker(const Position &position, const Statistic &statistic, Tool *tool) :
-	position(position), statistic(statistic), tool(tool)
+	position(position), statistic(statistic), id(nextId++)
 {
+	if (tool) {
+		if (toolRegistry[tool])
+			toolRegistry[tool]->takeToolAway();
+		this->tool = tool;
+		toolRegistry[tool] = this;
+	}
 	std::cout << "Worker parameterized constructor called" << std::endl;
 }
 
@@ -57,7 +63,8 @@ void Worker::setTool(Tool* newTool) {
 void Worker::displayInfo() const {
 	std::cout << "Position: " << this->position.getPositionString() << std::endl;
 	std::cout << "Statistic: " << this->statistic.getStatisticString() << std::endl;
-	std::cout << "Tool number of uses: " << this->tool->getNumberOfUses() << std::endl;
+	if (this->tool)
+		std::cout << "Tool number of uses: " << this->tool->getNumberOfUses() << std::endl;
 }
 
 void Worker::useTool() const {
@@ -75,4 +82,24 @@ void Worker::takeToolAway() {
 	}
 }
 
+void Worker::registerToWorkshop(Workshop *workshop) {
+	this->workshopsRegistry.push_back(workshop);
+	workshop->addWorker(this);
+	std::cout << "Worker " << Worker::id << ": registered to " << workshop->getName() << std::endl;
+}
+
+void Worker::leaveWorkshop(Workshop *workshop) {
+	std::vector<Workshop *>::iterator it = std::find(this->workshopsRegistry.begin(), this->workshopsRegistry.end(), workshop);
+	if (it != this->workshopsRegistry.end()) {
+		this->workshopsRegistry.erase(it);
+		workshop->releaseWorker(this);
+		std::cout << "Worker " << Worker::id << ": left " << workshop->getName() << std::endl;
+	}
+}
+
+void Worker::work() const {
+	std::cout << "Worker " << Worker::id << ": is working." << std::endl;
+}
+
 std::map<Tool *, Worker *> Worker::toolRegistry;
+long Worker::nextId = 0;

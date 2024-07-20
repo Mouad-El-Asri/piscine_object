@@ -2,7 +2,7 @@ NAME = relationship
 
 CPP = c++
 
-CPPFLAGS = -Wall -Wextra -Werror
+CPPFLAGS = -Wall -Wextra -Werror -std=c++98
 
 SRCS = Position.cpp \
 	Statistic.cpp \
@@ -10,6 +10,7 @@ SRCS = Position.cpp \
 	Shovel.cpp \
 	Hammer.cpp \
 	Worker.cpp \
+	Workshop.cpp \
 	main.cpp
 
 OBJS = $(SRCS:.cpp=.o)

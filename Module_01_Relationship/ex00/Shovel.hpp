@@ -10,7 +10,7 @@ class Shovel: public Tool {
 		Shovel &operator=(const Shovel &other);
 		~Shovel();
 
-		void use() override;
+		void use();
 };
 
 #endif

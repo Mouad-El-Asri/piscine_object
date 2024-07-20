@@ -10,7 +10,7 @@ class Hammer: public Tool {
 		Hammer &operator=(const Hammer &other);
 		~Hammer();
 
-		void use() override;
+		void use();
 };
 
 #endif
