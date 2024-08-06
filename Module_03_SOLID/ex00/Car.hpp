@@ -7,14 +7,14 @@
 #include "Brake.hpp"
 
 class Car {
-	public:
+	private:
 		Engine engine;
 		Transmission transmission;
 		Wheel wheel;
 		Brake brake;
 		int speed;
 
-	private:
+	public:
 		Car();
 		~Car();
 
